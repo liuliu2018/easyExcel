@@ -34,6 +34,17 @@ public class WriteModel extends BaseWriteModel {
     @ExcelProperty(value = {"表头6","表头62","表头622"},index = 9)
     private double p10;
 
+    @ExcelProperty(value = {"表头7", "表头71", "性别"}, index = 10, keyValue = "{'0':'女','1':'男'}")
+    private String p11;
+
+    public String getP11() {
+        return p11;
+    }
+
+    public void setP11(String p11) {
+        this.p11 = p11;
+    }
+
     public String getP1() {
         return p1;
     }

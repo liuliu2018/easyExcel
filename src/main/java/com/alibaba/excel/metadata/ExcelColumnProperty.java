@@ -25,6 +25,11 @@ public class ExcelColumnProperty implements Comparable<ExcelColumnProperty> {
      */
     private String format;
 
+    /**
+     * Default JSON format:{'k1':'v1','k2':'v2'}
+     */
+    private String keyValue;
+
     public String getFormat() {
         return format;
     }
@@ -55,6 +60,14 @@ public class ExcelColumnProperty implements Comparable<ExcelColumnProperty> {
 
     public void setHead(List<String> head) {
         this.head = head;
+    }
+
+    public String getKeyValue() {
+        return keyValue;
+    }
+
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
     }
 
     public int compareTo(ExcelColumnProperty o) {

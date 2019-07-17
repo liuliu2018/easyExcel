@@ -72,4 +72,17 @@ public class WorkBookUtil {
         return cell;
     }
 
+    public static  Cell createCell(Row row, int colNum, CellStyle cellStyle, Object cellValue, Boolean isNum, Boolean isEmptyJsonObject) {
+        Cell cell = row.createCell(colNum);
+        cell.setCellStyle(cellStyle);
+        if (null != cellValue) {
+            if (isNum && isEmptyJsonObject) {
+                cell.setCellValue(Double.parseDouble(cellValue.toString()));
+            } else {
+                cell.setCellValue(cellValue.toString());
+            }
+        }
+        return cell;
+    }
+
 }

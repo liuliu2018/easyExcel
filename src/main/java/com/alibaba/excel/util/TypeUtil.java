@@ -2,6 +2,7 @@ package com.alibaba.excel.util;
 
 import com.alibaba.excel.metadata.ExcelColumnProperty;
 import com.alibaba.excel.metadata.ExcelHeadProperty;
+import com.alibaba.fastjson.JSONObject;
 import net.sf.cglib.beans.BeanMap;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 
@@ -111,6 +112,16 @@ public class TypeUtil {
         return false;
     }
 
+    public static Boolean isEmptyJsonObject(String keyValue){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = JSONObject.parseObject(keyValue);
+        }catch (Exception e){
+
+        }
+        return (ObjectUtils.isEmpty(jsonObject) || jsonObject.size() == 0) ? true : false;
+    }
+
     public static Boolean isNum(Object cellValue) {
         if (cellValue instanceof Integer
             || cellValue instanceof Double
@@ -207,13 +218,23 @@ public class TypeUtil {
         return simpleDateFormat.format(cellValue);
     }
 
-    public static String getFieldStringValue(BeanMap beanMap, String fieldName, String format) {
+    public static String getFieldStringValue(BeanMap beanMap, String fieldName, String format, String keyValue) {
         String cellValue = null;
         Object value = beanMap.get(fieldName);
         if (value != null) {
-            if (value instanceof Date) {
-                cellValue = TypeUtil.formatDate((Date)value, format);
-            } else {
+            try {
+                if (value instanceof Date) {
+                    cellValue = TypeUtil.formatDate((Date)value, format);
+                } else {
+                    //键值转换
+                    JSONObject jsonObject = JSONObject.parseObject(keyValue);
+                    if (null != jsonObject && jsonObject.size() > 0) {
+                        cellValue = String.valueOf(jsonObject.get(value));
+                    } else {
+                        cellValue = value.toString();
+                    }
+                }
+            } catch (Exception e) {
                 cellValue = value.toString();
             }
         }

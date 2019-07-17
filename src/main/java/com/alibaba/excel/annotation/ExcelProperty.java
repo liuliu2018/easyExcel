@@ -33,4 +33,12 @@ public @interface ExcelProperty {
       * @return
       */
      String format() default "";
+
+     /**
+      * according the JSON convert key to value;
+      * ====================================
+      * Default JSON format:{'k1':'v1','k2':'v2'}
+      * @return java.lang.String
+      */
+     String keyValue() default "";
 }

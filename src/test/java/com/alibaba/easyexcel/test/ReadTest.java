@@ -23,7 +23,7 @@ public class ReadTest {
      */
     @Test
     public void simpleReadListStringV2007() throws IOException {
-        InputStream inputStream = FileUtil.getResourcesFileInputStream("2007.xlsx");
+        InputStream inputStream = FileUtil.getResourcesFileInputStream("D:\\Desktop\\临时文件\\2003.xls");
         List<Object> data = EasyExcelFactory.read(inputStream, new Sheet(1, 0));
         inputStream.close();
         print(data);

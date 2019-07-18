@@ -13,7 +13,7 @@ public class WriteModel extends BaseWriteModel {
     @ExcelProperty(value = {"表头3","表头3","表头3"},index = 2)
     private int p3;
 
-    @ExcelProperty(value = {"表头1","表头4","表头4"},index = 3)
+    @ExcelProperty(value = {"表头1","表头4","表头4"},index = 3, shrink = true, shrinkValue = "100")
     private long p4;
 
     @ExcelProperty(value = {"表头5","表头51","表头52"},index = 4)
@@ -31,21 +31,33 @@ public class WriteModel extends BaseWriteModel {
     @ExcelProperty(value = {"表头6","表头62","表头622"},index = 8)
     private String p9;
 
-    @ExcelProperty(value = {"表头6","表头62","表头622"},index = 9)
-    private double p10;
+    @ExcelProperty(value = {"表头6","表头62","表头622"},index = 9, shrink = true)
+    private long p10;
+    
+    @ExcelProperty(value = {"表头7","表头72","表头722"},index = 10, keyValue = "{'0':'女','1':'男'}")
+    private int p11;
+    
+    @ExcelProperty(value = {"表头8","表头82","表头822"},index = 11, format="yyyy-MM-dd")
+    private Long p12;
 
-    @ExcelProperty(value = {"表头7", "表头71", "性别"}, index = 10, keyValue = "{'0':'女','1':'男'}")
-    private String p11;
+  
+	public Long getP12() {
+		return p12;
+	}
 
-    public String getP11() {
-        return p11;
-    }
+	public void setP12(Long p12) {
+		this.p12 = p12;
+	}
 
-    public void setP11(String p11) {
-        this.p11 = p11;
-    }
+	public int getP11() {
+		return p11;
+	}
 
-    public String getP1() {
+	public void setP11(int p11) {
+		this.p11 = p11;
+	}
+
+	public String getP1() {
         return p1;
     }
 
@@ -117,11 +129,11 @@ public class WriteModel extends BaseWriteModel {
         this.p9 = p9;
     }
 
-    public double getP10() {
+    public long getP10() {
         return p10;
     }
 
-    public void setP10(double p10) {
+    public void setP10(long p10) {
         this.p10 = p10;
     }
 

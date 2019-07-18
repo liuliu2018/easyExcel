@@ -24,13 +24,48 @@ public class ExcelColumnProperty implements Comparable<ExcelColumnProperty> {
     /**
      */
     private String format;
-
-    /**
-     * Default JSON format:{'k1':'v1','k2':'v2'}
-     */
+    
     private String keyValue;
+    
+    private Boolean date;
 
-    public String getFormat() {
+    private Boolean shrink;
+    
+    private String shrinkValue;
+
+	public Boolean getDate() {
+		return date;
+	}
+
+	public void setDate(Boolean date) {
+		this.date = date;
+	}
+
+	public Boolean getShrink() {
+		return shrink;
+	}
+
+	public void setShrink(Boolean shrink) {
+		this.shrink = shrink;
+	}
+
+	public String getShrinkValue() {
+		return shrinkValue;
+	}
+
+	public void setShrinkValue(String shrinkValue) {
+		this.shrinkValue = shrinkValue;
+	}
+
+	public String getKeyValue() {
+		return keyValue;
+	}
+
+	public void setKeyValue(String keyValue) {
+		this.keyValue = keyValue;
+	}
+
+	public String getFormat() {
         return format;
     }
 
@@ -60,14 +95,6 @@ public class ExcelColumnProperty implements Comparable<ExcelColumnProperty> {
 
     public void setHead(List<String> head) {
         this.head = head;
-    }
-
-    public String getKeyValue() {
-        return keyValue;
-    }
-
-    public void setKeyValue(String keyValue) {
-        this.keyValue = keyValue;
     }
 
     public int compareTo(ExcelColumnProperty o) {

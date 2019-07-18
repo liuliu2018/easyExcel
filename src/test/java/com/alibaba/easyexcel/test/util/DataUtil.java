@@ -61,13 +61,15 @@ public class DataUtil {
             model1.setP1("第一列，第行");
             model1.setP2("121212jjj");
             model1.setP3(33+i);
-            model1.setP4(44);
+            model1.setP4(44 + i);
             model1.setP5("555");
             model1.setP6(666.2f);
             model1.setP7(new BigDecimal("454545656343434"+i));
             model1.setP8(new Date());
             model1.setP9("llll9999>&&&&&6666^^^^");
-            model1.setP10(1111.77+i);
+            model1.setP10(5982456 + i);
+            model1.setP11(i % 2);
+            model1.setP12(1563366188806L);
             model1s.add(model1);
         }
         return model1s;

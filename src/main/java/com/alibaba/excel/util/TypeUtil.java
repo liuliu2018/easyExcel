@@ -3,6 +3,7 @@ package com.alibaba.excel.util;
 import com.alibaba.excel.metadata.ExcelColumnProperty;
 import com.alibaba.excel.metadata.ExcelHeadProperty;
 import com.alibaba.fastjson.JSONObject;
+
 import net.sf.cglib.beans.BeanMap;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 
@@ -111,17 +112,16 @@ public class TypeUtil {
         }
         return false;
     }
-
-    public static Boolean isEmptyJsonObject(String keyValue){
+    
+    public static Boolean isEmptyJsonObject(String keyValue) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject = JSONObject.parseObject(keyValue);
-        }catch (Exception e){
-
+        } catch (Exception e) {
         }
         return (ObjectUtils.isEmpty(jsonObject) || jsonObject.size() == 0) ? true : false;
     }
-
+   
     public static Boolean isNum(Object cellValue) {
         if (cellValue instanceof Integer
             || cellValue instanceof Double
@@ -218,30 +218,55 @@ public class TypeUtil {
         return simpleDateFormat.format(cellValue);
     }
 
-    public static String getFieldStringValue(BeanMap beanMap, String fieldName, String format, String keyValue) {
+    public static String getFieldStringValue(BeanMap beanMap, String fieldName, String format, String keyValue, 
+    		Boolean isDate, Boolean shrink, String shrinkValue) {
         String cellValue = null;
         Object value = beanMap.get(fieldName);
         if (value != null) {
-            try {
-                if (value instanceof Date) {
-                    cellValue = TypeUtil.formatDate((Date)value, format);
-                } else {
-                    //键值转换
-                    JSONObject jsonObject = JSONObject.parseObject(keyValue);
-                    if (null != jsonObject && jsonObject.size() > 0) {
-                        cellValue = String.valueOf(jsonObject.get(value));
-                    } else {
-                        cellValue = value.toString();
-                    }
-                }
-            } catch (Exception e) {
-                cellValue = value.toString();
-            }
+        	try {
+        		if (value instanceof Date) {
+        			cellValue = TypeUtil.formatDate((Date)value, format);
+        		} else if (value instanceof Long && (!StringUtils.isEmpty(format) || isDate)) {
+					cellValue = TypeUtil.formatDate((Long)value, format);
+        		}else if (value instanceof Long && shrink) {
+					cellValue = TypeUtil.formatShrink((Long)value, shrinkValue);
+        		} else {
+        			JSONObject jsonObject = JSONObject.parseObject(keyValue);
+        			if (null != jsonObject && jsonObject.size() > 0) {
+						cellValue = String.valueOf(jsonObject.get(value));
+					} else {
+						cellValue = value.toString();						
+					}
+        		}
+			} catch (Exception e) {
+				cellValue = value.toString();	
+			}
         }
         return cellValue;
     }
 
-    public static Map getFieldValues(List<String> stringList, ExcelHeadProperty excelHeadProperty, Boolean use1904WindowDate) {
+    private static String formatShrink(Long value, String shrinkValue) {
+    	BigDecimal valueBig = new BigDecimal(value);
+    	if (!StringUtils.isEmpty(shrinkValue)) {
+    		BigDecimal shrinkValueBig = new BigDecimal(shrinkValue);
+    		return valueBig.divide(shrinkValueBig).toString();
+		}else {
+			return valueBig.divide(new BigDecimal(10000)).toString();
+		}
+	}
+
+	private static String formatDate(Long cellValue, String format) {
+    	SimpleDateFormat simpleDateFormat;
+        if(!StringUtils.isEmpty(format)) {
+             simpleDateFormat = new SimpleDateFormat(format);
+        }else {
+		     simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+        Date date = new Date(cellValue);
+        return simpleDateFormat.format(date);
+	}
+
+	public static Map getFieldValues(List<String> stringList, ExcelHeadProperty excelHeadProperty, Boolean use1904WindowDate) {
         Map map = new HashMap();
         for (int i = 0; i < stringList.size(); i++) {
             ExcelColumnProperty columnProperty = excelHeadProperty.getExcelColumnProperty(i);
@@ -255,4 +280,14 @@ public class TypeUtil {
         }
         return map;
     }
+
+	public static Boolean isToDate(String format, Boolean isDate) {
+		if (isDate) {
+			return true;
+		}else if (!StringUtils.isEmpty(format)) {
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -2,6 +2,7 @@ package com.alibaba.excel.metadata;
 
 import com.alibaba.excel.annotation.ExcelColumnNum;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.util.StringUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -80,6 +81,9 @@ public class ExcelHeadProperty {
             excelHeadProperty.setIndex(p.index());
             excelHeadProperty.setFormat(p.format());
             excelHeadProperty.setKeyValue(p.keyValue());
+            excelHeadProperty.setDate(p.date());
+            excelHeadProperty.setShrink(p.shrink());
+            excelHeadProperty.setShrinkValue(p.shrinkValue());
             excelColumnPropertyMap1.put(p.index(), excelHeadProperty);
         } else {
             ExcelColumnNum columnNum = f.getAnnotation(ExcelColumnNum.class);
@@ -89,6 +93,9 @@ public class ExcelHeadProperty {
                 excelHeadProperty.setIndex(columnNum.value());
                 excelHeadProperty.setFormat(columnNum.format());
                 excelHeadProperty.setKeyValue(columnNum.keyValue());
+                excelHeadProperty.setDate(columnNum.date());
+                excelHeadProperty.setShrink(columnNum.shrink());
+                excelHeadProperty.setShrinkValue(columnNum.shrinkValue());
                 excelColumnPropertyMap1.put(columnNum.value(), excelHeadProperty);
             }
         }

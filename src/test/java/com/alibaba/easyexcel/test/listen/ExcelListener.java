@@ -14,8 +14,9 @@ public class ExcelListener extends AnalysisEventListener {
     @Override
     public void invoke(Object object, AnalysisContext context) {
         System.out.println(context.getCurrentSheet());
-        data.add(object);
-        if(data.size()>=100){
+        if(data.size()<=100){
+            data.add(object);
+        }else {
             doSomething();
             data = new ArrayList<Object>();
         }

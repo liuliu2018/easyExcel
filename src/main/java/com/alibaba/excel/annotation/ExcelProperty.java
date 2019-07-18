@@ -6,8 +6,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
 /**
  * @author jipengfei
+ */
+/**
+ * @author PC
+ *
+ */
+/**
+ * @author PC
+ *
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -29,16 +39,24 @@ public @interface ExcelProperty {
       *
       * default @see com.alibaba.excel.util.TypeUtil
       * if default is not  meet you can set format
-      *
+      * if isDate = true  , this optional 
       * @return
       */
      String format() default "";
-
+     
      /**
-      * according the JSON convert key to value;
-      * ====================================
-      * Default JSON format:{'k1':'v1','k2':'v2'}
-      * @return java.lang.String
+      * eg:"{'k1':'v1','k2':'v2'}"
+      * @return
       */
      String keyValue() default "";
+     
+     /**
+      * default false
+      * @return
+      */
+     boolean date() default false;
+     
+     boolean shrink() default false;
+     
+     String shrinkValue() default "";
 }

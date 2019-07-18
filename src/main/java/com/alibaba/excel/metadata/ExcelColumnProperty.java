@@ -9,29 +9,39 @@ import java.util.List;
  */
 public class ExcelColumnProperty implements Comparable<ExcelColumnProperty> {
 
-    /**
-     */
-    private Field field;
+	/**
+	 */
+	private Field field;
 
-    /**
-     */
-    private int index = 99999;
+	/**
+	 */
+	private int index = 99999;
 
-    /**
-     */
-    private List<String> head = new ArrayList<String>();
+	/**
+	 */
+	private List<String> head = new ArrayList<String>();
 
-    /**
-     */
-    private String format;
-    
-    private String keyValue;
-    
-    private Boolean date;
+	/**
+	 */
+	private String format;
 
-    private Boolean shrink;
-    
-    private String shrinkValue;
+	private String keyValue;
+
+	private Boolean date;
+
+	private Boolean shrink;
+
+	private String shrinkValue;
+
+	private String percent;
+
+	public String getPercent() {
+		return percent;
+	}
+
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
 
 	public Boolean getDate() {
 		return date;
@@ -66,40 +76,40 @@ public class ExcelColumnProperty implements Comparable<ExcelColumnProperty> {
 	}
 
 	public String getFormat() {
-        return format;
-    }
+		return format;
+	}
 
-    public void setFormat(String format) {
-        this.format = format;
-    }
+	public void setFormat(String format) {
+		this.format = format;
+	}
 
-    public Field getField() {
-        return field;
-    }
+	public Field getField() {
+		return field;
+	}
 
-    public void setField(Field field) {
-        this.field = field;
-    }
+	public void setField(Field field) {
+		this.field = field;
+	}
 
-    public int getIndex() {
-        return index;
-    }
+	public int getIndex() {
+		return index;
+	}
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
+	public void setIndex(int index) {
+		this.index = index;
+	}
 
-    public List<String> getHead() {
-        return head;
-    }
+	public List<String> getHead() {
+		return head;
+	}
 
-    public void setHead(List<String> head) {
-        this.head = head;
-    }
+	public void setHead(List<String> head) {
+		this.head = head;
+	}
 
-    public int compareTo(ExcelColumnProperty o) {
-        int x = this.index;
-        int y = o.getIndex();
-        return (x < y) ? -1 : ((x == y) ? 0 : 1);
-    }
+	public int compareTo(ExcelColumnProperty o) {
+		int x = this.index;
+		int y = o.getIndex();
+		return (x < y) ? -1 : ((x == y) ? 0 : 1);
+	}
 }

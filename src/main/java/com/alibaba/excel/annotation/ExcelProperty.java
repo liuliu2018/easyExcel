@@ -6,57 +6,66 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
-
 /**
  * @author jipengfei
- */
-/**
  * @author PC
- *
- */
-/**
- * @author PC
- *
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ExcelProperty {
 
-     /**
-      * @return
-      */
-     String[] value() default {""};
+	/**
+	 * @return
+	 */
+	String[] value() default { "" };
 
+	/**
+	 * @return
+	 */
+	int index() default 99999;
 
-     /**
-      * @return
-      */
-     int index() default 99999;
+	/**
+	 *
+	 * default @see com.alibaba.excel.util.TypeUtil if default is not meet you can
+	 * set format if isDate = true , this optional
+	 * 
+	 * @return
+	 */
+	String format() default "";
 
-     /**
-      *
-      * default @see com.alibaba.excel.util.TypeUtil
-      * if default is not  meet you can set format
-      * if isDate = true  , this optional 
-      * @return
-      */
-     String format() default "";
-     
-     /**
-      * eg:"{'k1':'v1','k2':'v2'}"
-      * @return
-      */
-     String keyValue() default "";
-     
-     /**
-      * default false
-      * @return
-      */
-     boolean date() default false;
-     
-     boolean shrink() default false;
-     
-     String shrinkValue() default "";
+	/**
+	 * eg:"{'k1':'v1','k2':'v2'}"
+	 * 
+	 * @return
+	 */
+	String keyValue() default "";
+
+	/**
+	 * 是否将Long转换成时间
+	 * 
+	 * @return
+	 */
+	boolean date() default false;
+
+	/**
+	 * 是否缩小10000倍
+	 * 
+	 * @return
+	 */
+	boolean shrink() default false;
+
+	/**
+	 * 缩小的值。不填默认缩小10000
+	 * 
+	 * @return
+	 */
+	String shrinkValue() default "";
+
+	/**
+	 * 追加符号
+	 * 
+	 * @return
+	 */
+	String percent() default "";
 }

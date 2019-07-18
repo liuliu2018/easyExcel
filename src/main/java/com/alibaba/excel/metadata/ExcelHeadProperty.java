@@ -84,6 +84,7 @@ public class ExcelHeadProperty {
             excelHeadProperty.setDate(p.date());
             excelHeadProperty.setShrink(p.shrink());
             excelHeadProperty.setShrinkValue(p.shrinkValue());
+            excelHeadProperty.setPercent(p.percent());
             excelColumnPropertyMap1.put(p.index(), excelHeadProperty);
         } else {
             ExcelColumnNum columnNum = f.getAnnotation(ExcelColumnNum.class);
@@ -96,6 +97,7 @@ public class ExcelHeadProperty {
                 excelHeadProperty.setDate(columnNum.date());
                 excelHeadProperty.setShrink(columnNum.shrink());
                 excelHeadProperty.setShrinkValue(columnNum.shrinkValue());
+                excelHeadProperty.setPercent(columnNum.percent());
                 excelColumnPropertyMap1.put(columnNum.value(), excelHeadProperty);
             }
         }

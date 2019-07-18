@@ -13,7 +13,7 @@ public class WriteModel extends BaseWriteModel {
     @ExcelProperty(value = {"表头3","表头3","表头3"},index = 2)
     private int p3;
 
-    @ExcelProperty(value = {"表头1","表头4","表头4"},index = 3, shrink = true, shrinkValue = "100")
+    @ExcelProperty(value = {"表头1","表头4","表头4"},index = 3, shrink = true, shrinkValue = "100", percent = "%")
     private long p4;
 
     @ExcelProperty(value = {"表头5","表头51","表头52"},index = 4)

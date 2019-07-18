@@ -116,7 +116,7 @@ public class ExcelBuilderImpl implements ExcelBuilder {
             BaseRowModel baseRowModel = (BaseRowModel)oneRowData;
             String cellValue = TypeUtil.getFieldStringValue(beanMap, excelHeadProperty.getField().getName(),
                 excelHeadProperty.getFormat(), excelHeadProperty.getKeyValue(), excelHeadProperty.getDate(),
-                excelHeadProperty.getShrink(), excelHeadProperty.getShrinkValue());
+                excelHeadProperty.getShrink(), excelHeadProperty.getShrinkValue(), excelHeadProperty.getPercent());
             CellStyle cellStyle = baseRowModel.getStyle(i) != null ? baseRowModel.getStyle(i)
                 : context.getCurrentContentStyle();
             Cell cell = WorkBookUtil.createCell(row, i, cellStyle, cellValue,

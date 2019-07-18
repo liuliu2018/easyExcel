@@ -219,7 +219,7 @@ public class TypeUtil {
     }
 
     public static String getFieldStringValue(BeanMap beanMap, String fieldName, String format, String keyValue, 
-    		Boolean isDate, Boolean shrink, String shrinkValue) {
+    		Boolean isDate, Boolean shrink, String shrinkValue, String percent) {
         String cellValue = null;
         Object value = beanMap.get(fieldName);
         if (value != null) {
@@ -229,7 +229,7 @@ public class TypeUtil {
         		} else if (value instanceof Long && (!StringUtils.isEmpty(format) || isDate)) {
 					cellValue = TypeUtil.formatDate((Long)value, format);
         		}else if (value instanceof Long && shrink) {
-					cellValue = TypeUtil.formatShrink((Long)value, shrinkValue);
+					cellValue = TypeUtil.formatShrink((Long)value, shrinkValue, percent);
         		} else {
         			JSONObject jsonObject = JSONObject.parseObject(keyValue);
         			if (null != jsonObject && jsonObject.size() > 0) {
@@ -245,14 +245,19 @@ public class TypeUtil {
         return cellValue;
     }
 
-    private static String formatShrink(Long value, String shrinkValue) {
+    private static String formatShrink(Long value, String shrinkValue, String percent) {
+    	StringBuffer cellValue = new StringBuffer();
     	BigDecimal valueBig = new BigDecimal(value);
     	if (!StringUtils.isEmpty(shrinkValue)) {
     		BigDecimal shrinkValueBig = new BigDecimal(shrinkValue);
-    		return valueBig.divide(shrinkValueBig).toString();
+    		cellValue.append(valueBig.divide(shrinkValueBig).toString());
 		}else {
-			return valueBig.divide(new BigDecimal(10000)).toString();
+			cellValue.append(valueBig.divide(new BigDecimal(10000)).toString());
 		}
+    	if (!StringUtils.isEmpty(percent)) {
+    		cellValue.append(percent);
+		}
+    	return cellValue.toString();
 	}
 
 	private static String formatDate(Long cellValue, String format) {

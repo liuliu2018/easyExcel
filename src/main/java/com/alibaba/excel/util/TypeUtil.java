@@ -1,15 +1,12 @@
 package com.alibaba.excel.util;
 
-import com.alibaba.excel.format.KeyValueFormat;
 import com.alibaba.excel.metadata.ExcelColumnProperty;
 import com.alibaba.excel.metadata.ExcelHeadProperty;
 import com.alibaba.fastjson.JSONObject;
-
 import net.sf.cglib.beans.BeanMap;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -223,13 +220,10 @@ public class TypeUtil {
     }
 
     public static String getFieldStringValue(BeanMap beanMap, String fieldName, String format, String keyValue, 
-    		Boolean isDate, Boolean shrink, String shrinkValue, String percent, Class<? extends KeyValueFormat> class1) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
+    		Boolean isDate, Boolean shrink, String shrinkValue, String percent) {
         String cellValue = null;
         Object value = beanMap.get(fieldName);
         if (value != null) {
-    		KeyValueFormat newInstance = class1.newInstance();
-			String keyValue2 = newInstance.getKeyValue();
-			
         	try {
         		if (value instanceof Date) {
         			cellValue = TypeUtil.formatDate((Date)value, format);
@@ -238,12 +232,9 @@ public class TypeUtil {
         		} else if (value instanceof Long && shrink) {
 					cellValue = TypeUtil.formatShrink((Long)value, shrinkValue, percent);
         		} else {
-        			if (Objects.nonNull(keyValue2)) {
-						keyValue = keyValue2;
-					}
         			JSONObject jsonObject = JSONObject.parseObject(keyValue);
         			if (null != jsonObject && jsonObject.size() > 0) {
-						cellValue = String.valueOf(jsonObject.get(value));
+						cellValue = String.valueOf(jsonObject.get( value.toString()));
 					} else {
 						cellValue = value.toString();						
 					}

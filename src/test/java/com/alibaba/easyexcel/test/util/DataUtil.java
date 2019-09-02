@@ -68,8 +68,14 @@ public class DataUtil {
             model1.setP8(new Date());
             model1.setP9("llll9999>&&&&&6666^^^^");
             model1.setP10(5982456 + i);
-            model1.setP11(i % 2);
-            model1.setP12(1563366188806L);
+            model1.setP11(new Byte(String.valueOf(i % 2)));
+            if (i%3 == 0){
+                model1.setP12(1563366188806L);
+            }else if (i % 3 == 1){
+                model1.setP12(0L);
+            }else {
+                model1.setP12(null);
+            }
             model1s.add(model1);
         }
         return model1s;

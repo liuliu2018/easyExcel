@@ -35,9 +35,9 @@ public class WriteModel extends BaseWriteModel {
     private long p10;
     
     @ExcelProperty(value = {"表头7","表头72","表头722"},index = 10, keyValue = "{'0':'女','1':'男'}")
-    private int p11;
+    private Byte p11;
     
-    @ExcelProperty(value = {"表头8","表头82","表头822"},index = 11, format="yyyy-MM-dd")
+    @ExcelProperty(value = {"表头8","表头82","表头822"},index = 11, format="yyyy-MM-dd", date = true)
     private Long p12;
 
   
@@ -49,11 +49,11 @@ public class WriteModel extends BaseWriteModel {
 		this.p12 = p12;
 	}
 
-	public int getP11() {
+	public Byte getP11() {
 		return p11;
 	}
 
-	public void setP11(int p11) {
+	public void setP11(Byte p11) {
 		this.p11 = p11;
 	}
 

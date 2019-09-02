@@ -216,6 +216,9 @@ public class TypeUtil {
         }else {
             simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         }
+        if (ObjectUtils.isEmpty(cellValue)) {
+            return "";
+        }
         return simpleDateFormat.format(cellValue);
     }
 
@@ -267,6 +270,9 @@ public class TypeUtil {
              simpleDateFormat = new SimpleDateFormat(format);
         }else {
 		     simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+        if (ObjectUtils.isEmpty(cellValue) || ObjectUtils.nullSafeEquals(0L,cellValue)) {
+            return "";
         }
         Date date = new Date(cellValue);
         return simpleDateFormat.format(date);

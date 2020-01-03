@@ -24,6 +24,14 @@ import java.util.List;
  */
 public class ExcelWriter {
 
+    public ExcelBuilder getExcelBuilder() {
+        return excelBuilder;
+    }
+
+    public void setExcelBuilder(ExcelBuilder excelBuilder) {
+        this.excelBuilder = excelBuilder;
+    }
+
     private ExcelBuilder excelBuilder;
 
     /**

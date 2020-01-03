@@ -32,7 +32,13 @@ public class ExcelHeadProperty {
     /**
      * Attributes described by the header
      */
-    private Map<Integer, ExcelColumnProperty> excelColumnPropertyMap1 = new HashMap<Integer, ExcelColumnProperty>();
+    private Map<Object, ExcelColumnProperty> excelColumnPropertyMap1 = new HashMap<Object, ExcelColumnProperty>();
+
+    public Map<Object, ExcelColumnProperty> getExcelColumnPropertyMap2() {
+        return excelColumnPropertyMap2;
+    }
+
+    private Map<Object, ExcelColumnProperty> excelColumnPropertyMap2 = new HashMap<Object, ExcelColumnProperty>();
 
     public ExcelHeadProperty(Class<? extends BaseRowModel> headClazz, List<List<String>> head) {
         this.headClazz = headClazz;
@@ -86,6 +92,9 @@ public class ExcelHeadProperty {
             excelHeadProperty.setShrinkValue(p.shrinkValue());
             excelHeadProperty.setPercent(p.percent());
             excelColumnPropertyMap1.put(p.index(), excelHeadProperty);
+            if (p.value().length == 1 && p.value()[0] != ""){
+                excelColumnPropertyMap2.put(p.value()[0], excelHeadProperty);
+            }
         } else {
             ExcelColumnNum columnNum = f.getAnnotation(ExcelColumnNum.class);
             if (columnNum != null) {
@@ -129,7 +138,7 @@ public class ExcelHeadProperty {
      * @param columnNum
      * @return
      */
-    public ExcelColumnProperty getExcelColumnProperty(int columnNum) {
+    public ExcelColumnProperty getExcelColumnProperty(Object columnNum) {
         return excelColumnPropertyMap1.get(columnNum);
     }
 

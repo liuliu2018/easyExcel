@@ -33,7 +33,7 @@ public class ModelBuildEventListener extends AnalysisEventListener {
             return resultModel;
         }
         BeanMap.create(resultModel).putAll(
-            TypeUtil.getFieldValues(stringList, excelHeadProperty, context.use1904WindowDate()));
+            TypeUtil.getFieldValues(stringList, excelHeadProperty, context.use1904WindowDate(), context.getExcelHead()));
         return resultModel;
     }
 

@@ -129,4 +129,8 @@ public interface AnalysisContext {
      * @param use1904WindowDate
      */
     void setUse1904WindowDate(boolean use1904WindowDate);
+
+    List<String> getExcelHead();
+
+    void setExcelHead(List<String> excelHead);
 }

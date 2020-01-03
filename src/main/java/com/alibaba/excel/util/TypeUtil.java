@@ -278,10 +278,27 @@ public class TypeUtil {
         return simpleDateFormat.format(date);
 	}
 
-	public static Map getFieldValues(List<String> stringList, ExcelHeadProperty excelHeadProperty, Boolean use1904WindowDate) {
+	public static Map getFieldValues(List<String> stringList, ExcelHeadProperty excelHeadProperty,
+                                     Boolean use1904WindowDate, List<String> excelHead) {
         Map map = new HashMap();
+        Map<Object, ExcelColumnProperty> excelColumnPropertyMap2 = excelHeadProperty.getExcelColumnPropertyMap2();
+//        if (!excelColumnPropertyMap2.isEmpty()){
+//            if (excelColumnPropertyMap2.keySet().size() != stringList.size()){
+//                throw new RuntimeException("按名称导入，但是模板表头名称与实体类value标注的名称数量不相等");
+//            }
+//        }
         for (int i = 0; i < stringList.size(); i++) {
-            ExcelColumnProperty columnProperty = excelHeadProperty.getExcelColumnProperty(i);
+            ExcelColumnProperty columnProperty = null;
+            //先按value解析。找不到再按index解析
+            if (!excelColumnPropertyMap2.isEmpty()){
+                columnProperty = excelColumnPropertyMap2.get(excelHead.get(i));
+                if (columnProperty == null){
+                    throw new RuntimeException(String.format("按名称导入，但是模板表头名称[%s]在实体类value标注的名称里面找不到", excelHead.get(i)));
+                }
+            }else {
+                columnProperty = excelHeadProperty.getExcelColumnProperty(i);
+            }
+
             if (columnProperty != null) {
                 Object value = TypeUtil.convert(stringList.get(i), columnProperty.getField(),
                     columnProperty.getFormat(), use1904WindowDate);

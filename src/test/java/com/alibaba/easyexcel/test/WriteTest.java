@@ -37,7 +37,7 @@ public class WriteTest {
 
         //写第二个sheet sheet2  模型上打有表头的注解，合并单元格
         Sheet sheet2 = new Sheet(2, 3, WriteModel.class, "第二个sheet", null);
-        sheet2.setTableStyle(createTableStyle());
+//        sheet2.setTableStyle(createTableStyle());
         //writer.write1(null, sheet2);
         writer.write(createTestListJavaMode(), sheet2);
         //需要合并单元格

@@ -4,7 +4,9 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.event.AnalysisEventRegisterCenter;
 import com.alibaba.excel.event.OneRowAnalysisFinishEvent;
+import com.alibaba.excel.metadata.ExcelHeadProperty;
 import com.alibaba.excel.metadata.Sheet;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.util.TypeUtil;
 
 import java.util.ArrayList;
@@ -59,6 +61,12 @@ public abstract class BaseSaxAnalyser implements AnalysisEventRegisterCenter, Ex
             if (analysisContext.getCurrentRowNum() <= analysisContext.getCurrentSheet().getHeadLineMun() - 1) {
                 analysisContext.buildExcelHeadProperty(null,
                     (List<String>)analysisContext.getCurrentRowAnalysisResult());
+                //如果是第一行。把EXCEL表头存起来。
+                if (analysisContext.getExcelType() == ExcelTypeEnum.XLSX){
+                    if (analysisContext.getExcelHead() == null || analysisContext.getExcelHead().size() == 0){
+                        analysisContext.setExcelHead((List<String>)analysisContext.getCurrentRowAnalysisResult());
+                    }
+                }
             }
         } else {
             List<String> content = converter((List<String>)event.getData());

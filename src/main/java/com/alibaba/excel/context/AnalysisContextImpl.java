@@ -33,6 +33,8 @@ public class AnalysisContextImpl implements AnalysisContext {
 
     private ExcelHeadProperty excelHeadProperty;
 
+    private List<String> excelHead;
+
     private boolean trim;
 
     private boolean use1904WindowDate = false;
@@ -168,5 +170,15 @@ public class AnalysisContextImpl implements AnalysisContext {
     @Override
     public boolean trim() {
         return this.trim;
+    }
+
+    @Override
+    public List<String> getExcelHead() {
+        return excelHead;
+    }
+
+    @Override
+    public void setExcelHead(List<String> excelHead) {
+        this.excelHead = excelHead;
     }
 }

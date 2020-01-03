@@ -117,8 +117,10 @@ public class ExcelBuilderImpl implements ExcelBuilder {
             String cellValue = TypeUtil.getFieldStringValue(beanMap, excelHeadProperty.getField().getName(),
                 excelHeadProperty.getFormat(), excelHeadProperty.getKeyValue(), excelHeadProperty.getDate(),
                 excelHeadProperty.getShrink(), excelHeadProperty.getShrinkValue(), excelHeadProperty.getPercent());
-            CellStyle cellStyle = baseRowModel.getStyle(i) != null ? baseRowModel.getStyle(i)
-                : context.getCurrentContentStyle();
+//            CellStyle cellStyle = baseRowModel.getStyle(i) != null ? baseRowModel.getStyle(i)
+//                : context.getCurrentContentStyle();
+            //去掉自定义样式，直接采用默认样式
+            CellStyle cellStyle = context.getCurrentContentStyle();
             Cell cell = WorkBookUtil.createCell(row, i, cellStyle, cellValue,
                 TypeUtil.isNum(excelHeadProperty.getField()), TypeUtil.isEmptyJsonObject(excelHeadProperty.getKeyValue()),
                 TypeUtil.isToDate(excelHeadProperty.getFormat(), excelHeadProperty.getDate()),

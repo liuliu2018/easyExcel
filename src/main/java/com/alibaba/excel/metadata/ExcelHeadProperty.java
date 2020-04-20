@@ -92,7 +92,7 @@ public class ExcelHeadProperty {
             excelHeadProperty.setShrinkValue(p.shrinkValue());
             excelHeadProperty.setPercent(p.percent());
             excelColumnPropertyMap1.put(p.index(), excelHeadProperty);
-            if (p.value().length == 1 && p.value()[0] != ""){
+            if (p.value().length == 1 && !Objects.equals(p.value()[0], "")){
                 excelColumnPropertyMap2.put(p.value()[0], excelHeadProperty);
             }
         } else {

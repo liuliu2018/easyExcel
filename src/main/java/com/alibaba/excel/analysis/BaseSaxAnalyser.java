@@ -9,10 +9,7 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.alibaba.excel.util.TypeUtil;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author jipengfei
@@ -70,6 +67,10 @@ public abstract class BaseSaxAnalyser implements AnalysisEventRegisterCenter, Ex
             }
         } else {
             List<String> content = converter((List<String>)event.getData());
+            //校验这一行的数据是不是都是null  POI中有DELETE和右键删除的差别问题。
+            if (content.stream().allMatch(s -> Objects.isNull(s))){
+                return ;
+            }
             /** Parsing Analyze the body content **/
             analysisContext.setCurrentRowAnalysisResult(content);
             if (listeners.size() == 1) {

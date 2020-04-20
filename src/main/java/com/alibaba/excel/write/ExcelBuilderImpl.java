@@ -28,6 +28,14 @@ import java.util.List;
  */
 public class ExcelBuilderImpl implements ExcelBuilder {
 
+    public WriteContext getContext() {
+        return context;
+    }
+
+    public void setContext(WriteContext context) {
+        this.context = context;
+    }
+
     private WriteContext context;
 
     public ExcelBuilderImpl(InputStream templateInputStream,
